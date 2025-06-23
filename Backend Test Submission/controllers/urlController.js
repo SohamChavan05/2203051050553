@@ -75,7 +75,7 @@ exports.handleRedirect = (req, res) => {
   record.clicks.push({
     timestamp: new Date(),
     source: req.get("referrer") || "direct",
-    location: "unknown" // Geo-location skipped for simplicity
+    location: "unknown" 
   });
 
   Log("backend", "info", "controller", `Redirecting to original URL for ${shortcode}`);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { createShortUrl } from "../utils/api";
 import Log from "../logger";
+import "../styles/ShortenerPage.css";
 
 const ShortenerPage = () => {
   const [url, setUrl] = useState("");
@@ -31,40 +32,54 @@ const ShortenerPage = () => {
   };
 
   return (
-    <Box p={3}>
-      <Typography variant="h4">URL Shortener</Typography>
-      <TextField
-        label="Long URL"
-        fullWidth
-        margin="normal"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <TextField
-        label="Validity (minutes)"
-        fullWidth
-        margin="normal"
-        value={validity}
-        onChange={(e) => setValidity(e.target.value)}
-      />
-      <TextField
-        label="Custom Shortcode"
-        fullWidth
-        margin="normal"
-        value={shortcode}
-        onChange={(e) => setShortcode(e.target.value)}
-      />
-      <Button variant="contained" onClick={handleShorten}>
-        Shorten
-      </Button>
+    <div className="shortener-container">
+      <Box className="shortener-box" p={4}>
+        <Typography variant="h4" mb={2}>
+          URL Shortener
+        </Typography>
 
-      {result && (
-        <Box mt={2}>
-          <Typography>Short Link: {result.shortLink}</Typography>
-          <Typography>Expires at: {result.expiry}</Typography>
-        </Box>
-      )}
-    </Box>
+        <TextField
+          label="Long URL"
+          fullWidth
+          margin="normal"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <TextField
+          label="Validity (minutes)"
+          fullWidth
+          margin="normal"
+          value={validity}
+          onChange={(e) => setValidity(e.target.value)}
+        />
+        <TextField
+          label="Custom Shortcode"
+          fullWidth
+          margin="normal"
+          value={shortcode}
+          onChange={(e) => setShortcode(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={handleShorten}
+          sx={{ mt: 2 }}
+        >
+          Shorten
+        </Button>
+
+        {result && (
+          <Box mt={3}>
+            <Typography>
+              <strong>Short Link:</strong> {result.shortLink}
+            </Typography>
+            <Typography>
+              <strong>Expires at:</strong> {result.expiry}
+            </Typography>
+          </Box>
+        )}
+      </Box>
+    </div>
   );
 };
 
